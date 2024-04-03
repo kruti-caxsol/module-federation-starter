@@ -1,10 +1,14 @@
-import React from 'react'
-import '../src/style.css'
-const Login = React.lazy(() => import('authapp/Login'))
-import ErrorBoundary from './component/ErrorBoundary'
+import React from "react";
+import "../src/style.css";
+const Login = React.lazy(() => import("authapp/Login"));
+import ErrorBoundary from "./component/ErrorBoundary";
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Landing from './component/Landing'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
+import Landing from "./component/Landing";
 
 export const App = () => {
   return (
@@ -14,7 +18,7 @@ export const App = () => {
           <Route path="/">
             <Route index={true} element={<Landing />} />
           </Route>
-
+          
           <Route
             path="/login"
             element={
@@ -28,5 +32,5 @@ export const App = () => {
         </Routes>
       </BrowserRouter>
     </>
-  )
-}
+  );
+};
