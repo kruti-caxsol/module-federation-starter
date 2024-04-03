@@ -9,6 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -49,12 +52,12 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.6.0",
+    "husky": "^8.0.3",
     "style-loader": "^3.3.4",
     "typescript": "^5.4.3",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.3",
-    "webpack-merge": "^5.10.0",
-    "husky": "^8.0.0"
+    "webpack-merge": "^5.10.0"
   }
 }
