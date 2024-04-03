@@ -11,6 +11,7 @@ import {
 import Landing from "./component/Landing";
 
 export const App = () => {
+  const testenv = process.env.TEST_ENVR;
   return (
     <>
       <BrowserRouter>

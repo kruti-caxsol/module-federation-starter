@@ -1,9 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-  // const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
   const {ModuleFederationPlugin} = require("webpack").container;
   const deps = require("../package.json").dependencies;
-  // const Dotenv = require('dotenv-webpack');
+  const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: path.resolve(__dirname, '..', './src/index.tsx'),
@@ -35,11 +34,7 @@ module.exports = {
       },
     ],
   },
-  // output: {
-  //   path: path.resolve(__dirname, '..', './build'),
-  //   // publicPath: path.resolve(__dirname, '..', './'),
-  //   filename: 'bundle.js',
-  // },
+ 
   output: {
       path: path.resolve(__dirname, '..', './build'),
       filename: 'bundle.js',
@@ -67,16 +62,11 @@ module.exports = {
         "@mui/material": { singleton: true , eager:true, requiredVersion:deps['@mui/material'] },
         "@emotion/react": { singleton: true,eager:true, requiredVersion: deps["@emotion/react"] },
         "@emotion/styled": { singleton: true,eager:true, requiredVersion: deps["@emotion/styled"] },  
-        "react-router-dom":{ singleton: true , eager:true, requiredVersion:deps["react-router-dom"] },
+        // "react-router-dom":{ singleton: true , eager:true, requiredVersion:deps["react-router-dom"] },
         // "graphql":{ singleton: true , eager:true, requiredVersion:deps["graphql"] },
         // "@apollo/client":{ singleton: true , eager:true, requiredVersion:deps["@apollo/client"] },
       },
     })
   ],
-  stats: {
-    colors: true,
-    modules: true,
-    reasons: true,
-    errorDetails: true
-  },
+  stats: 'errors-only',
 }
