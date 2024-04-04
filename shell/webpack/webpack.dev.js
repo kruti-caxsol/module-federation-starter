@@ -1,6 +1,8 @@
-
 const webpack = require("webpack");
 const ESLintPlugin = require("eslint-webpack-plugin");
+
+const Dotenv = require("dotenv-webpack");
+const path = require("path");
 
 module.exports = {
   mode: "development",
