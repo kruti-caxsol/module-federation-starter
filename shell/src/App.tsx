@@ -1,36 +1,31 @@
 import React from "react";
-import "../src/style.css";
+import "./style.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ErrorBoundary from "./component/ErrorBoundary.tsx";
+import Landing from "./component/Landing.tsx";
+
 const Login = React.lazy(() => import("authapp/Login"));
-import ErrorBoundary from "./component/ErrorBoundary";
 
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
-import Landing from "./component/Landing";
-
-export const App = () => {
+export default function App() {
+  // const abc = 52;
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index={true} element={<Landing />} />
-          </Route>
-          
-          <Route
-            path="/login"
-            element={
-              <ErrorBoundary>
-                <React.Suspense fallback="Loading">
-                  <Login />
-                </React.Suspense>
-              </ErrorBoundary>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Landing />} />
+        </Route>
+
+        <Route
+          path="/login"
+          element={
+            <ErrorBoundary>
+              <React.Suspense fallback="Loading">
+                <Login />
+              </React.Suspense>
+            </ErrorBoundary>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
-};
+}

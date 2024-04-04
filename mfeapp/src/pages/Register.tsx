@@ -6,30 +6,25 @@ import {
   Container,
   FormControlLabel,
   Grid,
-  Link,
   TextField,
   Typography,
 } from "@mui/material";
-import { FormEvent, useEffect } from "react";
+import { FormEvent } from "react";
 // import { getAuthToken, setAuthToken } from "@hr/services";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
-
-export default function Register({}: Props) {
+export default function Register() {
   const navigate = useNavigate();
+  //   const REGISTER_USER = gql`
+  //     mutation RegisterUser($username: String!, $password: String!) {
+  //       signup(username: $username, password: $password)
+  //     }
+  //   `;
 
-//   const REGISTER_USER = gql`
-//     mutation RegisterUser($username: String!, $password: String!) {
-//       signup(username: $username, password: $password)
-//     }
-//   `;
- 
-//   const [registerUser, response] = useMutation(REGISTER_USER);
+  //   const [registerUser, response] = useMutation(REGISTER_USER);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
     // registerUser({
     //   variables: {
@@ -99,15 +94,14 @@ export default function Register({}: Props) {
             Sign Up
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                {/* Forgot password? */}
-              </Link>
-            </Grid>
-            <Grid item >
-               <Typography  onClick={()=>{
-                navigate("/login")
-              }} sx={{color:'#1769aa', fontSize:'14px' ,cursor:'pointer'}}>
+            <Grid item xs />
+            <Grid item>
+              <Typography
+                onClick={() => {
+                  navigate("/login");
+                }}
+                sx={{ color: "#1769aa", fontSize: "14px", cursor: "pointer" }}
+              >
                 Already have an account? Sign In.
               </Typography>
             </Grid>

@@ -5,18 +5,11 @@ import {
   Container,
   FormControlLabel,
   Grid,
-  Link,
   TextField,
   Typography,
 } from "@mui/material";
 
-
-type Props = {};
-
-export default function LoginCard({}: Props) {
-
- 
-
+export default function LoginCard() {
   return (
     // <ApolloProvider client={client}>
 
@@ -35,7 +28,7 @@ export default function LoginCard({}: Props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={()=>{}} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={() => {}} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -69,17 +62,14 @@ export default function LoginCard({}: Props) {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                {/* Forgot password? */}
-              </Link>
-            </Grid>
             <Grid item>
-             
-              <Typography  onClick={()=>{
-                // navigate("/register")
-              }} sx={{color:'#1769aa', fontSize:'14px' ,cursor:'pointer'}}>
-                Don't have an account? Sign Up
+              <Typography
+                onClick={() => {
+                  // navigate("/register")
+                }}
+                sx={{ color: "#1769aa", fontSize: "14px", cursor: "pointer" }}
+              >
+                Dont have an account? Sign Up
               </Typography>
             </Grid>
           </Grid>

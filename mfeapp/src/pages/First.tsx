@@ -1,10 +1,5 @@
-
-type Props = {}
-
-function First({}: Props) {
-  return (
-    <div>First</div>
-  )
+function First() {
+  return <div>First</div>;
 }
 
-export default First
+export default First;

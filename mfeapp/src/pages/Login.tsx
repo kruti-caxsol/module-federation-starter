@@ -1,13 +1,5 @@
+import LoginCard from "../component/Login.tsx";
 
-
-import LoginCard from "../component/Login";
-
-
-type Props = {};
-
-export default function Login({}: Props) {
-
-  return (
- <LoginCard/>
-  );
+export default function Login() {
+  return <LoginCard />;
 }

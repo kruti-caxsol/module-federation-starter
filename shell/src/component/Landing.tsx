@@ -1,8 +1,3 @@
-
-type Props = {}
-
-export default function Landing({}: Props) {
-  return (
-    <div>Landing</div>
-  )
+export default function Landing() {
+  return <div>Landing</div>;
 }

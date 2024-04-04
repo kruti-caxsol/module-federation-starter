@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from "react";
 
 interface Props {
-  children: React.ReactNode; 
+  children: ReactNode;
 }
 
 interface State {
@@ -14,22 +14,24 @@ class ErrorBoundary extends React.Component<Props, State> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error) {
-    console.log('error',error)
-    return { hasError: true };
-  }
+  // static getDerivedStateFromError(error: Error) {
+  //   console.log("error", error);
+  //   return { hasError: true };
+  // }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // Log error to reporting service
-    console.log('print error',  error, errorInfo); 
-  }
+  // componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  //   // Log error to reporting service
+  //   console.log("print error", error, errorInfo);
+  // }
 
   render() {
-    if (this.state.hasError) {
+    const { hasError } = this.state;
+    const { children } = this.props;
+    if (hasError) {
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return children;
   }
 }
 
