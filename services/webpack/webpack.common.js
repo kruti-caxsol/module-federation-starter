@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const deps = require("../package.json").dependencies;
-const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
@@ -34,26 +33,24 @@ module.exports = {
       },
     ],
   },
-
   output: {
     path: path.resolve(__dirname, "..", "./build"),
     filename: "bundle.js",
-    publicPath: "/",
   },
   plugins: [
-    // new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "./src/index.html"),
     }),
     new ModuleFederationPlugin({
-      name: "shellapp",
-      remotes: {
-        authapp: "authapp@http://localhost:8081/remoteEntry.js",
-        services: "services@http://localhost:8085/remoteEntry.js",
-        eventpublisher: "eventpublisher@http://localhost:8090/remoteEntry.js",
-        app1: "app1@http://localhost:8082/remoteEntry.js",
+      name: "services",
+      filename: "remoteEntry.js",
+      exposes: {
+        // "./hooks": path.resolve(__dirname, '..', './src/customHooks'),
+        "./customHooksSR": path.resolve(__dirname, "..", "./src/customHooks"),
+        "./apollo_SR": path.resolve(__dirname, "..", "./src/apollo/index.ts"),
+        "./PubSub_SR": path.resolve(__dirname, "..", "./src/pubsub/PubSub.tsx"),
       },
-      exposes: {},
+      remotes: {},
       shared: {
         ...deps,
         react: { singleton: true, eager: true, requiredVersion: deps.react },
@@ -62,24 +59,6 @@ module.exports = {
           eager: true,
           requiredVersion: deps["react-dom"],
         },
-        "@mui/material": {
-          singleton: true,
-          eager: true,
-          requiredVersion: deps["@mui/material"],
-        },
-        "@emotion/react": {
-          singleton: true,
-          eager: true,
-          requiredVersion: deps["@emotion/react"],
-        },
-        "@emotion/styled": {
-          singleton: true,
-          eager: true,
-          requiredVersion: deps["@emotion/styled"],
-        },
-        // "react-router-dom":{ singleton: true , eager:true, requiredVersion:deps["react-router-dom"] },
-        // "graphql":{ singleton: true , eager:true, requiredVersion:deps["graphql"] },
-        // "@apollo/client":{ singleton: true , eager:true, requiredVersion:deps["@apollo/client"] },
       },
     }),
   ],
