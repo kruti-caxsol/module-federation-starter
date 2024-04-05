@@ -1,11 +1,15 @@
 import "./style.css";
 import ErrorBoundary from "./ErrorBoundary.tsx";
-import Login from "./pages/Login.tsx";
+import DemoPubSub from "./component/DemoPubSub.tsx";
+// import Login from "./pages/Login.tsx";
 
 function App() {
   return (
     <ErrorBoundary>
-      <Login />
+      {/* <Login /> */}
+      <div>
+        <DemoPubSub />
+      </div>
     </ErrorBoundary>
   );
 }

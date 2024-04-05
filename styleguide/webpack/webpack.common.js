@@ -34,25 +34,24 @@ module.exports = {
       },
     ],
   },
-
   output: {
     path: path.resolve(__dirname, "..", "./build"),
     filename: "bundle.js",
-    publicPath: "/",
+    publicPath: "auto",
   },
   plugins: [
-    // new Dotenv(),
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "./src/index.html"),
     }),
     new ModuleFederationPlugin({
-      name: "shellapp",
-      remotes: {
-        authapp: "authapp@http://localhost:8081/remoteEntry.js",
-        services: "services@http://localhost:8085/remoteEntry.js",
-        styleguide: "styleguide@http://localhost:8084/remoteEntry.js",
+      name: "styleguide",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./BasicCard": path.resolve(__dirname, "..", "./src/App.tsx"),
+        "./theme": path.resolve(__dirname, "..", "./src/Theme/theme.ts"),
       },
-      exposes: {},
+      remotes: {},
       shared: {
         ...deps,
         react: { singleton: true, eager: true, requiredVersion: deps.react },
@@ -76,9 +75,6 @@ module.exports = {
           eager: true,
           requiredVersion: deps["@emotion/styled"],
         },
-        // "react-router-dom":{ singleton: true , eager:true, requiredVersion:deps["react-router-dom"] },
-        // "graphql":{ singleton: true , eager:true, requiredVersion:deps["graphql"] },
-        // "@apollo/client":{ singleton: true , eager:true, requiredVersion:deps["@apollo/client"] },
       },
     }),
   ],

@@ -1,25 +1,26 @@
 {
-    "compilerOptions": {
-      "allowUnreachableCode": false,
-      "exactOptionalPropertyTypes": true,
-      "noFallthroughCasesInSwitch": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "noImplicitAny": true,
-      "noImplicitReturns": true,
-      "alwaysStrict": true,
-      "strictBindCallApply": true,
-      "strictFunctionTypes": true,
-      "strictNullChecks": true,
-      "strictPropertyInitialization": true,
-      "jsx": "react-jsx",
-      "esModuleInterop": true,
-      "allowJs": true,
-      "checkJs": true,
-      "isolatedModules": true
-    },
-    "include": ["src/**/**/*", "src/declarations.d.ts"],
-    "exclude": ["node_modules"]
-  }
-  
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": true,
+    "isolatedModules": true
+  },
+  "include": ["src/**/**/*"],
+  "exclude": ["node_modules"]
+}

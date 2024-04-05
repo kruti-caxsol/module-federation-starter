@@ -1,20 +1,13 @@
-// import { Counter } from './Counter'
-import "../src/style.css";
-// import { useCustomHook1, useCustomHook2 } from "../src/customHooks";
-import { ApolloProvider } from "@apollo/client";
+import "./style.css";
+import ErrorBoundary from "./ErrorBoundary.tsx";
 
-import {client} from "./apollo/apolloClient";
-import Counteries from "./components/Counteries";
-const App = () => {
-
- 
+function App() {
   return (
-    <>
-    <ApolloProvider client={client}>
-        <h1>Services {process.env.NODE_ENV}</h1>
-        <Counteries/>
-    </ApolloProvider>
-    </>
+    <ErrorBoundary>
+      <div>
+        <h1>Services</h1>
+      </div>
+    </ErrorBoundary>
   );
-};
+}
 export default App;

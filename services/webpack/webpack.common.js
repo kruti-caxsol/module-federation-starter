@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const deps = require("../package.json").dependencies;
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: path.resolve(__dirname, "..", "./src/index.tsx"),
@@ -36,8 +37,10 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "..", "./build"),
     filename: "bundle.js",
+    publicPath: "auto",
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "./src/index.html"),
     }),
@@ -45,9 +48,6 @@ module.exports = {
       name: "services",
       filename: "remoteEntry.js",
       exposes: {
-        // "./hooks": path.resolve(__dirname, '..', './src/customHooks'),
-        "./customHooksSR": path.resolve(__dirname, "..", "./src/customHooks"),
-        "./apollo_SR": path.resolve(__dirname, "..", "./src/apollo/index.ts"),
         "./PubSub_SR": path.resolve(__dirname, "..", "./src/pubsub/PubSub.tsx"),
       },
       remotes: {},
@@ -58,6 +58,21 @@ module.exports = {
           singleton: true,
           eager: true,
           requiredVersion: deps["react-dom"],
+        },
+        "@mui/material": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["@mui/material"],
+        },
+        "@emotion/react": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["@emotion/react"],
+        },
+        "@emotion/styled": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["@emotion/styled"],
         },
       },
     }),

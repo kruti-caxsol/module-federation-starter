@@ -1,16 +1,18 @@
-import React from "react";
-
 declare module "*.png";
 declare module "authapp/Auth" {
-  const Counter: React.ComponentType;
+  import { ComponentType } from "react";
+  const Counter: ComponentType;
   export default Counter;
 }
 declare module "authapp/Login" {
-  const Login: React.ComponentType;
+  import { ComponentType } from "react";
+  const Login: ComponentType;
   export default Login;
 }
+
 declare module "authapp/Register" {
-  const Register: React.ComponentType;
+  import { ComponentType } from "react";
+  const Register: ComponentType;
   export default Register;
 }
 declare module "app1/CounterAppOne" {

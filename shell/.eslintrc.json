@@ -25,7 +25,7 @@
     // "project": "./tsconfig.json"
   },
   "plugins": ["react", "@typescript-eslint"],
-  "ignorePatterns": ["webpack"],
+  "ignorePatterns": ["webpack", "declaration.d.ts"],
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",

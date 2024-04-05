@@ -6,7 +6,7 @@ export const eventEmitter = new EventEmitter();
 // Custom hook for subscribing to an event
 export const useSub = (
   eventName: string,
-  handler: (...args: any[]) => void,
+  handler: (...args: string[]) => void,
 ) => {
   useEffect(() => {
     eventEmitter.on(eventName, handler);
@@ -14,11 +14,11 @@ export const useSub = (
     return () => {
       eventEmitter.off(eventName, handler);
     };
-  }, [eventEmitter, eventName, handler]);
+  }, [eventName, handler]);
 };
 
 // Function to publish an event
-export const pubEmitter = (eventName: string, userData: { name: string }) => {
+export const eventPub = (eventName: string, userData: { name: string }) => {
   eventEmitter.emit(eventName, userData);
 };
 
@@ -26,13 +26,13 @@ export const pubEmitter = (eventName: string, userData: { name: string }) => {
 export const useLocalStorageListener = (eventKeys: string[]) => {
   // State to store events retrieved from localStorage
   const [events, setEvents] = useState<{
-    [key: string]: { name: string; data: any };
+    [key: string]: { name: string; data: string };
   }>({});
 
   useEffect(() => {
     // Function to retrieve events from localStorage
     const getEventsFromLocalStorage = () => {
-      const eventsData: { [key: string]: { name: string; data: any } } = {};
+      const eventsData: { [key: string]: { name: string; data: string } } = {};
       eventKeys.forEach((key) => {
         const eventDataString = localStorage.getItem(key);
         if (eventDataString) {
@@ -66,12 +66,13 @@ export const useLocalStorageListener = (eventKeys: string[]) => {
     return () => {
       window.removeEventListener("storage", storageEventListener);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return events;
 };
 
-//emit event and store in LocalStorage
+// emit event and store in LocalStorage
 export const useEventEmitter = () => {
   const emitEvents = (
     events: {
