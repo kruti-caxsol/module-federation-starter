@@ -51,6 +51,11 @@ module.exports = {
         "./Auth": path.resolve(__dirname, "..", "./src/App.tsx"),
         "./Login": path.resolve(__dirname, "..", "./src/pages/Login.tsx"),
         "./Register": path.resolve(__dirname, "..", "./src/pages/Register.tsx"),
+        "./DemoPubSub": path.resolve(
+          __dirname,
+          "..",
+          "./src/component/DemoPubSub.tsx",
+        ),
       },
       remotes: {
         services: "services@http://localhost:8085/remoteEntry.js",

@@ -6,6 +6,7 @@ import ErrorBoundary from "./component/ErrorBoundary.tsx";
 import Landing from "./component/Landing.tsx";
 
 const Login = React.lazy(() => import("authapp/Login"));
+const DemoPubSub = React.lazy(() => import("authapp/DemoPubSub"));
 
 export default function App() {
   return (
@@ -21,6 +22,16 @@ export default function App() {
             <ErrorBoundary>
               <React.Suspense fallback="Loading">
                 <Login />
+              </React.Suspense>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/DemoPubSub"
+          element={
+            <ErrorBoundary>
+              <React.Suspense fallback="Loading">
+                <DemoPubSub />
               </React.Suspense>
             </ErrorBoundary>
           }

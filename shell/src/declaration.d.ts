@@ -15,3 +15,8 @@ declare module "authapp/Register" {
   const Register: ComponentType;
   export default Register;
 }
+declare module "authapp/DemoPubSub" {
+  import { ComponentType } from "react";
+  const DemoPubSub: ComponentType;
+  export default DemoPubSub;
+}
