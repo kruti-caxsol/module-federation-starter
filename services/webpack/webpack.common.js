@@ -49,7 +49,11 @@ module.exports = {
       filename: "remoteEntry.js",
       exposes: {
         "./PubSub_SR": path.resolve(__dirname, "..", "./src/pubsub/PubSub.tsx"),
-        "./apollo_SR": path.resolve(__dirname, "..", "./src/apollo/index.ts"),
+        "./apollo_SR": path.resolve(
+          __dirname,
+          "..",
+          "./src/apollo/apolloCommon.ts",
+        ),
         "./AuthUtils": path.resolve(
           __dirname,
           "..",

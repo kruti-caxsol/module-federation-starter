@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-export { client } from "./apolloCommon.ts";
+import { client } from "./apolloCommon.ts";
+
+export default client;
