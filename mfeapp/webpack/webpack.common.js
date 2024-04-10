@@ -59,6 +59,7 @@ module.exports = {
       },
       remotes: {
         services: "services@http://localhost:8085/remoteEntry.js",
+        styleguide: "styleguide@http://localhost:8084/remoteEntry.js",
       },
       shared: {
         ...deps,

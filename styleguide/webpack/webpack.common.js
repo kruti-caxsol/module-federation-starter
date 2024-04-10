@@ -50,6 +50,11 @@ module.exports = {
       exposes: {
         "./BasicCard": path.resolve(__dirname, "..", "./src/App.tsx"),
         "./theme": path.resolve(__dirname, "..", "./src/Theme/theme.ts"),
+        "./ExampleTwo": path.resolve(
+          __dirname,
+          "..",
+          "./src/component/ExampleTwo.tsx",
+        ),
       },
       remotes: {},
       shared: {

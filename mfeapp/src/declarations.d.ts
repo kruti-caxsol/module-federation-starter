@@ -25,3 +25,9 @@ declare module "services/PubSub_SR" {
     }[],
   ) => void;
 }
+declare module "styleguide/ExampleTwo" {
+  import React from "react";
+
+  const ExampleTwo: React.ComponentType;
+  export default ExampleTwo;
+}
