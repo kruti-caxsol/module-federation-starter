@@ -25,3 +25,7 @@ declare module "services/PubSub_SR" {
     }[],
   ) => void;
 }
+
+declare module "services/AuthUtils" {
+  export const setAuthToken: (value: string) => void;
+}

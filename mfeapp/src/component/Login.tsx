@@ -8,11 +8,50 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation, gql } from "@apollo/client";
 
-export default function LoginCard() {
+const LOGIN_MUTATION = gql`
+  mutation GetToken($username: String!, $password: String!) {
+    getToken(username: $username, password: $password)
+  }
+`;
+
+function LoginCard() {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+    onCompleted: (data) => {
+      const token = data.getToken;
+      localStorage.setItem("authToken", token);
+      // setAuthToken(token);
+      navigate("/dashboard");
+    },
+    onError: (err) => {
+      setError(err.message);
+    },
+  });
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      await login({
+        variables: {
+          username: email,
+          password,
+        },
+      });
+    } catch (err) {
+      setError("Failed to log in");
+    }
+  };
+
   return (
-    // <ApolloProvider client={client}>
-
     <Container component="main" maxWidth="xs" sx={{ height: "70vh" }}>
       <Box
         sx={{
@@ -28,7 +67,7 @@ export default function LoginCard() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={() => {}} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -58,9 +97,11 @@ export default function LoginCard() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Signing In..." : "Sign In"}
           </Button>
+          {error && <Typography color="error">{error}</Typography>}
           <Grid container>
             <Grid item>
               <Typography
@@ -69,13 +110,14 @@ export default function LoginCard() {
                 }}
                 sx={{ color: "#1769aa", fontSize: "14px", cursor: "pointer" }}
               >
-                Dont have an account? Sign Up
+                Do not have an account? Sign Up
               </Typography>
             </Grid>
           </Grid>
         </Box>
       </Box>
     </Container>
-    // </ApolloProvider>
   );
 }
+
+export default LoginCard;

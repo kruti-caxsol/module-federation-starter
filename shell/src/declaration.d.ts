@@ -20,3 +20,19 @@ declare module "authapp/DemoPubSub" {
   const DemoPubSub: ComponentType;
   export default DemoPubSub;
 }
+declare module "services/apollo_SR" {
+  import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
+  export const client: ApolloClient<NormalizedCacheObject>;
+}
+
+declare module "services/ProtectedRoute" {
+  const ProtectedRoute: React.FC<{
+    element: React.ReactElement;
+  }>;
+  export default ProtectedRoute;
+}
+declare module "authapp/UserList" {
+  import { ComponentType } from "react";
+  const Userlist: ComponentType;
+  export default Userlist;
+}
