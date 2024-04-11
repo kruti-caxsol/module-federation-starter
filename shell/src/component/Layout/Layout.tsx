@@ -18,6 +18,7 @@ import { useTheme } from "@mui/material/styles";
 // import { Logo } from "../../components/Sidebar/style";
 import { AppHeader, DrawerHeader, Main, BodyBox, MySkills } from "./style.ts";
 import "./Layout.css";
+import DropDownMenu from "../DropDownMenu.tsx";
 // import Sidebar from "../../Organisms/Sidebar/Sidebar.tsx";
 
 const drawerWidth = 240;
@@ -59,6 +60,9 @@ export default function HigherOrderLayout() {
             </div>
           </IconButton>
           {/* <Appbar /> */}
+          <div style={{ marginLeft: "auto" }}>
+            <DropDownMenu />
+          </div>
         </Toolbar>
       </AppHeader>
       <Drawer
