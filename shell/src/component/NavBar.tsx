@@ -24,7 +24,9 @@ export default function ButtonAppBar() {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const handleLogOut = () => {
     setAnchorEl(null);
     localStorage.clear();
@@ -55,7 +57,7 @@ export default function ButtonAppBar() {
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
-            onClose={handleLogOut}
+            onClose={handleClose}
           >
             {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem> */}
