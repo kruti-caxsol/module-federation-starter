@@ -1,4 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
+import { eventPub } from "services/PubSub_SR";
 
 const GET_USERS = gql`
   query GetUsers {
@@ -22,6 +23,14 @@ function UsersList() {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : "",
       },
+    },
+    onCompleted(data1) {
+      const users = data1.getUsers;
+      const firstUser = users.length > 0 ? users[0] : null;
+      if (firstUser) {
+        const { username } = firstUser;
+        eventPub("userName", username);
+      }
     },
   });
   if (loading) return <p>Loading...</p>;

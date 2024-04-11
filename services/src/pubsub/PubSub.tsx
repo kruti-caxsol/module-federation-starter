@@ -18,7 +18,10 @@ export const useSub = (
 };
 
 // Function to publish an event
-export const eventPub = (eventName: string, userData: { name: string }) => {
+export const eventPub = (
+  eventName: string,
+  userData: { name: string } | string,
+) => {
   eventEmitter.emit(eventName, userData);
 };
 

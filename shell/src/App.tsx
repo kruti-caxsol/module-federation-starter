@@ -7,6 +7,7 @@ import { client } from "services/apollo_SR";
 // import { Login } from "@authapp/Login";
 import ErrorBoundary from "./component/ErrorBoundary.tsx";
 import Landing from "./component/Landing.tsx";
+import NavBar from "./component/NavBar.tsx";
 
 // const client = React.lazy(() => import("services/client"));
 
@@ -18,6 +19,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
+        <NavBar />
         <Routes>
           {/* <Route path="/">
             <Route index element={<Landing />} />

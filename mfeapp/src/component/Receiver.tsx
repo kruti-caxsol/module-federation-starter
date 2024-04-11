@@ -2,7 +2,7 @@ import { useSub } from "services/PubSub_SR";
 
 function Receiver() {
   const handleUserLoggedIn = () => {
-    // console.log("print incomcidn", userData); userData: string
+    // console.log("print incomcidn", userData);userData: string;
   };
 
   useSub("userLoggedIn", handleUserLoggedIn);
