@@ -1,3 +1,4 @@
+// import { gql, useMutation, useQuery } from "@apollo/client";
 import {
   Box,
   Button,
@@ -8,48 +9,39 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import { FormEvent } from "react";
+// import { getAuthToken, setAuthToken } from "@hr/services";
 import { useNavigate } from "react-router-dom";
-import { useMutation, gql } from "@apollo/client";
-import { setAuthToken } from "services/AuthUtils";
 
-const LOGIN_MUTATION = gql`
-  mutation GetToken($username: String!, $password: String!) {
-    getToken(username: $username, password: $password)
-  }
-`;
-
-function LoginCard() {
+export default function Register() {
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted: (data) => {
-      navigate("/dashboard");
-    },
-    onError: (err) => {
-      setError(err.message);
-    },
-  });
+  //   const REGISTER_USER = gql`
+  //     mutation RegisterUser($username: String!, $password: String!) {
+  //       signup(username: $username, password: $password)
+  //     }
+  //   `;
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   const [registerUser, response] = useMutation(REGISTER_USER);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
 
-    try {
-      const random = await login({
-        variables: {
-          username: email,
-          password,
-        },
-      });
-      if (random.data) {
-        setAuthToken(random.data.getToken);
-      }
-    } catch (err) {
-      setError("Failed to log in");
-    }
+    // registerUser({
+    //   variables: {
+    //     username: data.get("email"),
+    //     password: data.get("password"),
+    //   },
+    //   onCompleted: (data: any) => {
+    //     if (data?.login) {
+    //     //   setAuthToken(data.login);
+    //     }
+    //     alert('Registered successfully')
+    //     navigate("/auth/login");
+    //   },
+    //   onError: (error) => {
+    //     alert(error)
+    //   }
+    // });
   };
 
   return (
@@ -66,7 +58,7 @@ function LoginCard() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -98,20 +90,19 @@ function LoginCard() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            disabled={loading}
           >
-            {loading ? "Signing In..." : "Sign In"}
+            Sign Up
           </Button>
-          {error && <Typography color="error">{error}</Typography>}
           <Grid container>
+            <Grid item xs />
             <Grid item>
               <Typography
                 onClick={() => {
-                  // navigate("/register")
+                  navigate("/login");
                 }}
                 sx={{ color: "#1769aa", fontSize: "14px", cursor: "pointer" }}
               >
-                Do not have an account? Sign Up
+                Already have an account? Sign In.
               </Typography>
             </Grid>
           </Grid>
@@ -120,5 +111,3 @@ function LoginCard() {
     </Container>
   );
 }
-
-export default LoginCard;
