@@ -1,7 +1,7 @@
-import { Button, ThemeProvider, createTheme } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material";
 import ErrorBoundary from "./ErrorBoundary.tsx";
 import "./style.css";
-import BasicCard from "./component/BasicCard.tsx";
+import BasicCard from "./Component/BasicCard.tsx";
 
 function App() {
   const theme = createTheme({
@@ -24,7 +24,6 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider theme={theme}>
         <h1> Style guide {process.env.NODE_ENV}</h1>
-        <Button variant="contained">lpsodjf</Button>
         <BasicCard />
       </ThemeProvider>
     </ErrorBoundary>

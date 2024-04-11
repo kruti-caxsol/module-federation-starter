@@ -3,28 +3,20 @@ import "./style.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "services/apollo_SR";
-// import ProtectedRoute from "services/ProtectedRoute";
-// import { Login } from "@authapp/Login";
 import ErrorBoundary from "./component/ErrorBoundary.tsx";
 import Landing from "./component/Landing.tsx";
-import NavBar from "./component/NavBar.tsx";
-
-// const client = React.lazy(() => import("services/client"));
+import Layout from "./component/Layout/Layout.tsx";
 
 const Login = React.lazy(() => import("authapp/Login"));
 const DemoPubSub = React.lazy(() => import("authapp/DemoPubSub"));
 const ProtectedRoute = React.lazy(() => import("services/ProtectedRoute"));
+// const Layout = React.lazy(() => import("styleguide/Layout"));
 
 export default function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <NavBar />
         <Routes>
-          {/* <Route path="/">
-            <Route index element={<Landing />} />
-          </Route> */}
-
           <Route
             path="/login"
             element={
@@ -46,15 +38,36 @@ export default function App() {
             }
           />
           <Route
-            path="/Dashboard"
+            path="/"
             element={
               <ErrorBoundary>
                 <React.Suspense fallback="Loading">
-                  <ProtectedRoute element={<Landing />} />
+                  <ProtectedRoute />
                 </React.Suspense>
               </ErrorBoundary>
             }
-          />
+          >
+            <Route
+              element={
+                <ErrorBoundary>
+                  <React.Suspense fallback="Loading">
+                    <Layout />
+                  </React.Suspense>
+                </ErrorBoundary>
+              }
+            >
+              <Route
+                path="/dashboard"
+                element={
+                  <ErrorBoundary>
+                    <React.Suspense fallback="Loading">
+                      <Landing />
+                    </React.Suspense>
+                  </ErrorBoundary>
+                }
+              />
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </ApolloProvider>

@@ -23,7 +23,7 @@ function LoginCard() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted: (data) => {
+    onCompleted: () => {
       navigate("/dashboard");
     },
     onError: (err) => {

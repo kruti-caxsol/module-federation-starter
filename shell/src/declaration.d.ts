@@ -26,9 +26,7 @@ declare module "services/apollo_SR" {
 }
 
 declare module "services/ProtectedRoute" {
-  const ProtectedRoute: React.FC<{
-    element: React.ReactElement;
-  }>;
+  const ProtectedRoute: React.FC<{}>;
   export default ProtectedRoute;
 }
 
@@ -65,4 +63,10 @@ declare module "services/PubSub_SR" {
       };
     }[],
   ) => void;
+}
+
+declare module "styleguide/Layout" {
+  import { ComponentType } from "react";
+  const Layout: ComponentType;
+  export default Layout;
 }

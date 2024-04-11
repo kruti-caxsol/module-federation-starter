@@ -49,8 +49,8 @@ module.exports = {
       name: "shellapp",
       remotes: {
         authapp: "authapp@http://localhost:8081/remoteEntry.js",
-        services: "services@http://localhost:8085/remoteEntry.js",
         styleguide: "styleguide@http://localhost:8084/remoteEntry.js",
+        services: "services@http://localhost:8085/remoteEntry.js",
         animation: "animation@http://localhost:8086/remoteEntry.js",
       },
       exposes: {},
