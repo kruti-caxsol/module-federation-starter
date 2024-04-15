@@ -10,6 +10,7 @@ import Layout from "./component/Layout/Layout.tsx";
 const Login = React.lazy(() => import("authapp/Login"));
 const DemoPubSub = React.lazy(() => import("authapp/DemoPubSub"));
 const ProtectedRoute = React.lazy(() => import("services/ProtectedRoute"));
+const Employee = React.lazy(() => import("employee/TotalEmployee"));
 // const Layout = React.lazy(() => import("styleguide/Layout"));
 
 export default function App() {
@@ -62,6 +63,16 @@ export default function App() {
                   <ErrorBoundary>
                     <React.Suspense fallback="Loading">
                       <Landing />
+                    </React.Suspense>
+                  </ErrorBoundary>
+                }
+              />
+              <Route
+                path="/employee"
+                element={
+                  <ErrorBoundary>
+                    <React.Suspense fallback="Loading">
+                      <Employee />
                     </React.Suspense>
                   </ErrorBoundary>
                 }

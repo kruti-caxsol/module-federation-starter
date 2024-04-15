@@ -1,24 +1,18 @@
 import React from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import {
-  Drawer,
-  CssBaseline,
-  Toolbar,
-  Divider,
-  IconButton,
-} from "@mui/material";
 import { Outlet } from "react-router";
-import {
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  GridView as GridViewIcon,
-} from "@mui/icons-material";
-// import SidebarLogo from "../../assets/images/SiderbarLogo.png";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Drawer from "@mui/material/Drawer";
+import CssBaseline from "@mui/material/CssBaseline";
+import Toolbar from "@mui/material/Toolbar";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import GridViewIcon from "@mui/icons-material/GridView";
 import { useTheme } from "@mui/material/styles";
-// import { Logo } from "../../components/Sidebar/style";
+import Sidebar from "../Sidebar/Sidebar.tsx";
 import { AppHeader, DrawerHeader, Main, BodyBox, MySkills } from "./style.ts";
 import "./Layout.css";
-// import Sidebar from "../../Organisms/Sidebar/Sidebar.tsx";
 
 const drawerWidth = 240;
 
@@ -95,7 +89,7 @@ export default function HigherOrderLayout() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        {/* <Sidebar /> */}
+        <Sidebar />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

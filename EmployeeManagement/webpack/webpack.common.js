@@ -34,27 +34,29 @@ module.exports = {
       },
     ],
   },
-
   output: {
     path: path.resolve(__dirname, "..", "./build"),
     filename: "bundle.js",
-    publicPath: "/",
+    publicPath: "auto",
   },
   plugins: [
-    // new Dotenv(),
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "./src/index.html"),
     }),
     new ModuleFederationPlugin({
-      name: "shellapp",
-      remotes: {
-        authapp: "authapp@http://localhost:8081/remoteEntry.js",
-        styleguide: "styleguide@http://localhost:8084/remoteEntry.js",
-        services: "services@http://localhost:8085/remoteEntry.js",
-        animation: "animation@http://localhost:8086/remoteEntry.js",
-        employee: "employee@http://localhost:8087/remoteEntry.js",
+      name: "employee",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./TotalEmployee": path.resolve(
+          __dirname,
+          "..",
+          "./src/Components/Employee.tsx",
+        ),
       },
-      exposes: {},
+      remotes: {
+        services: "services@http://localhost:8085/remoteEntry.js",
+      },
       shared: {
         ...deps,
         react: { singleton: true, eager: true, requiredVersion: deps.react },
@@ -78,9 +80,6 @@ module.exports = {
           eager: true,
           requiredVersion: deps["@emotion/styled"],
         },
-        // "react-router-dom":{ singleton: true , eager:true, requiredVersion:deps["react-router-dom"] },
-        // "graphql":{ singleton: true , eager:true, requiredVersion:deps["graphql"] },
-        // "@apollo/client":{ singleton: true , eager:true, requiredVersion:deps["@apollo/client"] },
       },
     }),
   ],

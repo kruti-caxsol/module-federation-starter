@@ -70,3 +70,9 @@ declare module "styleguide/Layout" {
   const Layout: ComponentType;
   export default Layout;
 }
+
+declare module "employee/TotalEmployee" {
+  import { ComponentType } from "react";
+  const Employees: ComponentType;
+  export default Employees;
+}

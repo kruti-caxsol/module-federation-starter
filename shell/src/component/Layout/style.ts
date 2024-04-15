@@ -4,7 +4,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 
 const drawerWidth = 240;
-const $iconcolor = "#6363ed"; // Define your SCSS variable
+const $iconcolor = "#6363ed";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;

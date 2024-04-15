@@ -1,0 +1,15 @@
+.sidebar-box {
+  width: 25%;
+  max-width: 250px;
+  height: 95vh;
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.link-style {
+  margin-bottom: 30px;
+}
+.link-style a {
+  text-decoration: none;
+}
