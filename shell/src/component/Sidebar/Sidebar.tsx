@@ -26,7 +26,7 @@ function Sidebar() {
     <div>
       <ul style={{ listStyleType: "none", padding: 0, paddingLeft: "50px" }}>
         {routes.map((route) => (
-          <li className="link-style">
+          <li key={route.label} className="link-style">
             <Link to={route.path}>{route.label}</Link>
           </li>
         ))}

@@ -64,6 +64,11 @@ module.exports = {
           "..",
           "./src/component/ProtectedRoutes/ProtectedRoutes.tsx",
         ),
+        "./QueryMutation_SR": path.resolve(
+          __dirname,
+          "..",
+          "./src/sharedQueryMutation/SharedQueryMutation.ts",
+        ),
       },
       remotes: {},
       shared: {

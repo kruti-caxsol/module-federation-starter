@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useQuery, useMutation, gql } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,55 +10,13 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
-
-// GraphQL query to fetch employees
-const GET_EMPLOYEES = gql`
-  query GetEmployees3 {
-    getEmployees {
-      id
-      name
-      department
-      createdBy
-      updatedBy
-    }
-  }
-`;
-
-// GraphQL mutation to add an employee
-const ADD_EMPLOYEE = gql`
-  mutation AddEmployee($name: String!, $department: Department) {
-    addEmployee(customer: { name: $name, department: $department }) {
-      id
-      name
-      department
-      createdBy
-      creationDateTime
-      updatedBy
-      modificationDateTime
-    }
-  }
-`;
-const REMOVE_EMPLOYEE = gql`
-  mutation RemoveEmployee($id: ID!) {
-    removeEmployee(id: $id)
-  }
-`;
-
-const UPDATE_EMPLOYEE = gql`
-  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {
-    updateEmployee(
-      customer: { id: $id, name: $name, department: $department }
-    ) {
-      id
-      name
-      department
-      createdBy
-      creationDateTime
-      updatedBy
-      modificationDateTime
-    }
-  }
-`;
+import {
+  GET_EMPLOYEES,
+  ADD_EMPLOYEE,
+  REMOVE_EMPLOYEE,
+  UPDATE_EMPLOYEE,
+} from "services/QueryMutation_SR";
+import { IconButton, SvgIcon } from "@mui/material";
 
 function EmployeeTable() {
   interface Employee {
@@ -157,8 +115,8 @@ function EmployeeTable() {
       .then(() => {
         setNewEmployee({ name: "", department: "" });
       })
-      .catch((error) => {
-        console.error("Error adding employee:", error);
+      .catch((err) => {
+        console.error("Error adding employee:", err);
       });
   };
 
@@ -171,8 +129,8 @@ function EmployeeTable() {
       .then(() => {
         console.log("Employee removed successfully.");
       })
-      .catch((error) => {
-        console.error("Error removing employee:", error);
+      .catch((err) => {
+        console.error("Error removing employee:", err);
       });
   };
 
@@ -193,8 +151,8 @@ function EmployeeTable() {
       .then(() => {
         closeModal();
       })
-      .catch((error) => {
-        console.error("Error updating employee:", error);
+      .catch((err) => {
+        console.error("Error updating employee:", err);
         // Add error handling logic here if needed
       });
   };
@@ -277,7 +235,21 @@ function EmployeeTable() {
             borderRadius: "8px",
           }}
         >
-          <h2>Edit Employee</h2>
+          <h3 style={{ marginTop: "-5px" }}>Edit Employee</h3>
+          <IconButton
+            aria-label="close"
+            onClick={closeModal}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <SvgIcon>
+              <path d="M19 6.41l-1.41-1.41L12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </SvgIcon>
+          </IconButton>
           <form
             onSubmit={(e) =>
               selectedEmployee &&
@@ -311,7 +283,7 @@ function EmployeeTable() {
                 } as Employee)
               }
               variant="outlined"
-              style={{ marginBottom: "10px" }}
+              style={{ marginBottom: "10px", marginLeft: "10px" }}
             />
             <Button variant="contained" color="primary" type="submit">
               Save Changes
