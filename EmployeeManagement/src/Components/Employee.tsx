@@ -285,6 +285,7 @@ function EmployeeTable() {
               variant="outlined"
               style={{ marginBottom: "10px", marginLeft: "10px" }}
             />
+            <br />
             <Button variant="contained" color="primary" type="submit">
               Save Changes
             </Button>
