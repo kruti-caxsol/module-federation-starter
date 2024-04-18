@@ -2,7 +2,9 @@ import React from "react";
 import "./style.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
+import { ThemeProvider } from "@mui/material";
 import { client } from "services/apollo_SR";
+import theme from "styleguide/theme";
 import ErrorBoundary from "./component/ErrorBoundary.tsx";
 import Landing from "./component/Landing.tsx";
 import Layout from "./component/Layout/Layout.tsx";
@@ -16,71 +18,72 @@ const Employee = React.lazy(() => import("employee/TotalEmployee"));
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <ErrorBoundary>
-                <React.Suspense fallback="Loading">
-                  <Login />
-                </React.Suspense>
-              </ErrorBoundary>
-            }
-          />
-          <Route
-            path="/DemoPubSub"
-            element={
-              <ErrorBoundary>
-                <React.Suspense fallback="Loading">
-                  <DemoPubSub />
-                </React.Suspense>
-              </ErrorBoundary>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <ErrorBoundary>
-                <React.Suspense fallback="Loading">
-                  <ProtectedRoute />
-                </React.Suspense>
-              </ErrorBoundary>
-            }
-          >
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <ErrorBoundary>
+                  <React.Suspense fallback="Loading">
+                    <Login />
+                  </React.Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/DemoPubSub"
+              element={
+                <ErrorBoundary>
+                  <React.Suspense fallback="Loading">
+                    <DemoPubSub />
+                  </React.Suspense>
+                </ErrorBoundary>
+              }
+            />
             <Route
               element={
                 <ErrorBoundary>
                   <React.Suspense fallback="Loading">
-                    <Layout />
+                    <ProtectedRoute />
                   </React.Suspense>
                 </ErrorBoundary>
               }
             >
               <Route
-                path="/dashboard"
                 element={
                   <ErrorBoundary>
                     <React.Suspense fallback="Loading">
-                      <Landing />
+                      <Layout />
                     </React.Suspense>
                   </ErrorBoundary>
                 }
-              />
-              <Route
-                path="/employee"
-                element={
-                  <ErrorBoundary>
-                    <React.Suspense fallback="Loading">
-                      <Employee />
-                    </React.Suspense>
-                  </ErrorBoundary>
-                }
-              />
+              >
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ErrorBoundary>
+                      <React.Suspense fallback="Loading">
+                        <Landing />
+                      </React.Suspense>
+                    </ErrorBoundary>
+                  }
+                />
+                <Route
+                  path="/employee"
+                  element={
+                    <ErrorBoundary>
+                      <React.Suspense fallback="Loading">
+                        <Employee />
+                      </React.Suspense>
+                    </ErrorBoundary>
+                  }
+                />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }
