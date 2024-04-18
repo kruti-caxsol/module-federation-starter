@@ -1,11 +1,13 @@
 import { ApolloProvider } from "@apollo/client";
 import { client } from "services/apollo_SR";
-import LoginCard from "../component/Login.tsx";
+import UsersList from "../Components/Users.tsx";
 
-export default function Login() {
+export default function EmployeePage() {
   return (
     <ApolloProvider client={client}>
-      <LoginCard />
+      <div>
+        <UsersList />
+      </div>
     </ApolloProvider>
   );
 }

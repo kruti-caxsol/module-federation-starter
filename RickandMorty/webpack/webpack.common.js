@@ -51,7 +51,7 @@ module.exports = {
         "./AnimationList": path.resolve(
           __dirname,
           "..",
-          "./src/component/Animation.tsx",
+          "./src/Pages/AnimationPage.tsx",
         ),
       },
       remotes: {

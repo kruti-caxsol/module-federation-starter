@@ -81,3 +81,8 @@ declare module "employee/TotalEmployee" {
   const Employees: ComponentType;
   export default Employees;
 }
+declare module "animation/AnimationList" {
+  import { ComponentType } from "react";
+  const AnimeEpisode: ComponentType;
+  export default AnimeEpisode;
+}

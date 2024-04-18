@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import { AnimationClient } from "services/apollo_SR";
 import ErrorBoundary from "./ErrorBoundary.tsx";
-import DemoPubSub from "./component/DemoPubSub.tsx";
 
 const AnimationList = React.lazy(() => import("./component/Animation.tsx"));
 
@@ -36,9 +35,6 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
-        <div>
-          <DemoPubSub />
-        </div>
       </ErrorBoundary>
     </ApolloProvider>
   );

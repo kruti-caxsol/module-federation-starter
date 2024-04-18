@@ -183,7 +183,7 @@ function EmployeeTable() {
           Add Employee
         </Button>
       </div>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ marginTop: "25px" }}>
         <Table>
           <TableHead>
             <TableRow>

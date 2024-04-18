@@ -15,6 +15,10 @@ const routes: RouteConfig[] = [
     path: "/employee",
     label: "Employee",
   },
+  {
+    path: "/link3",
+    label: "Rick and Morty",
+  },
 ];
 
 function Sidebar() {

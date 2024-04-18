@@ -32,3 +32,8 @@ declare module "services/PubSub_SR" {
 declare module "services/AuthUtils" {
   export const setAuthToken: (value: string) => void;
 }
+declare module "services/apollo_SR" {
+  import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
+
+  export const client: ApolloClient<NormalizedCacheObject>;
+}

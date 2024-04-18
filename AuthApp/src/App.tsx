@@ -6,6 +6,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 // import { client } from "services/apollo_SR";
 import ErrorBoundary from "./ErrorBoundary.tsx";
 import DemoPubSub from "./component/DemoPubSub.tsx";
+import First from "./pages/First.tsx";
 
 const Login = React.lazy(() => import("./component/Login.tsx"));
 
@@ -25,6 +26,16 @@ function App() {
                 <ErrorBoundary>
                   <React.Suspense fallback="Loading">
                     <Login />
+                  </React.Suspense>
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/link3"
+              element={
+                <ErrorBoundary>
+                  <React.Suspense fallback="Loading">
+                    <First />
                   </React.Suspense>
                 </ErrorBoundary>
               }
