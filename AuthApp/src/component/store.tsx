@@ -15,7 +15,7 @@
 
 // export default useAuthStore;
 
-import { create } from 'zustand';
+import { create } from "zustand";
 
 interface AuthStore {
   authToken: string | null;
@@ -23,9 +23,9 @@ interface AuthStore {
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
-  authToken: localStorage.getItem('authToken') || null,
+  authToken: localStorage.getItem("authToken") || null,
   setAuthToken: (token) => {
-    localStorage.setItem('authToken', token);
+    localStorage.setItem("authToken", token);
     set({ authToken: token });
   },
 }));
@@ -34,10 +34,10 @@ const useAuthStore = create<AuthStore>((set) => ({
 console.log("Initial Auth Token:", useAuthStore.getState().authToken);
 
 // Test Setter Function
-useAuthStore.getState().setAuthToken('dummy_token');
+useAuthStore.getState().setAuthToken("dummy_token");
 console.log("Updated Auth Token:", useAuthStore.getState().authToken);
 
 // Verify LocalStorage
-console.log("LocalStorage Auth Token:", localStorage.getItem('authToken'));
+console.log("LocalStorage Auth Token:", localStorage.getItem("authToken"));
 
 export default useAuthStore;

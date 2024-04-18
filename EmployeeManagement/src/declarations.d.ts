@@ -33,7 +33,7 @@ declare module "services/AuthUtils" {
 declare module "services/apollo_SR" {
   import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 
-  export const AnimationClient: ApolloClient<NormalizedCacheObject>;
+  export const client: ApolloClient<NormalizedCacheObject>;
 }
 declare module "services/QueryMutation_SR" {
   import { DocumentNode } from "@apollo/client";

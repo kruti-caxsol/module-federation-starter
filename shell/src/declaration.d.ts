@@ -30,7 +30,7 @@ declare module "services/ProtectedRoute" {
   export default ProtectedRoute;
 }
 
-declare module "authapp/UserList" {
+declare module "employee/UserList" {
   import { ComponentType } from "react";
   const Userlist: ComponentType;
   export default Userlist;

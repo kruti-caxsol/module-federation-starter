@@ -9,8 +9,6 @@ import DemoPubSub from "./component/DemoPubSub.tsx";
 
 const Login = React.lazy(() => import("./component/Login.tsx"));
 
-const UserList = React.lazy(() => import("./component/Users.tsx"));
-
 function App() {
   const client = new ApolloClient({
     uri: "http://localhost:8090/graphql",
@@ -27,16 +25,6 @@ function App() {
                 <ErrorBoundary>
                   <React.Suspense fallback="Loading">
                     <Login />
-                  </React.Suspense>
-                </ErrorBoundary>
-              }
-            />
-            <Route
-              path="/dash"
-              element={
-                <ErrorBoundary>
-                  <React.Suspense fallback="Loading">
-                    <UserList />
                   </React.Suspense>
                 </ErrorBoundary>
               }

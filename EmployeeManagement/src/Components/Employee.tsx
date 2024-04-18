@@ -279,7 +279,7 @@ function EmployeeTable() {
               onChange={(e) =>
                 setSelectedEmployee({
                   ...(selectedEmployee || {}),
-                  name: e.target.value,
+                  department: e.target.value,
                 } as Employee)
               }
               variant="outlined"

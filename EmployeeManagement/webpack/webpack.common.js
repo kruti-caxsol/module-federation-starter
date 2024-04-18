@@ -53,6 +53,11 @@ module.exports = {
           "..",
           "./src/Components/Employee.tsx",
         ),
+        "./UserList": path.resolve(
+          __dirname,
+          "..",
+          "./src/Components/Users.tsx",
+        ),
       },
       remotes: {
         services: "services@http://localhost:8085/remoteEntry.js",

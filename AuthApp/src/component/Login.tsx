@@ -12,7 +12,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, gql } from "@apollo/client";
 import { setAuthToken } from "services/AuthUtils";
-import useAuthStore from "./store";
+import useAuthStore from "./store.tsx";
+
 interface LoginData {
   getToken: string;
 }
@@ -28,9 +29,9 @@ function LoginCard() {
   const [error, setError] = useState("");
   const setAuthToken1 = useAuthStore((state) => state.setAuthToken);
   const authToken = useAuthStore((state) => state.authToken);
-  console.log(authToken,"abc");
+  console.log(authToken, "abc");
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted: (data:LoginData) => {
+    onCompleted: (data: LoginData) => {
       const token = data.getToken;
       localStorage.setItem("authToken", token);
       setAuthToken1(token);
