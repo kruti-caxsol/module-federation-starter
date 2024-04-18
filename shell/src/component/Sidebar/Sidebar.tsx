@@ -15,10 +15,6 @@ const routes: RouteConfig[] = [
     path: "/employee",
     label: "Employee",
   },
-  {
-    path: "/Link3",
-    label: "Link3",
-  },
 ];
 
 function Sidebar() {
