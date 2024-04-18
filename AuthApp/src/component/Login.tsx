@@ -27,14 +27,14 @@ const LOGIN_MUTATION = gql`
 function LoginCard() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const setAuthToken1 = useAuthStore((state) => state.setAuthToken);
+  const setZustandToken = useAuthStore((state) => state.setAuthToken);
   const authToken = useAuthStore((state) => state.authToken);
   console.log(authToken, "abc");
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted: (data: LoginData) => {
       const token = data.getToken;
       localStorage.setItem("authToken", token);
-      setAuthToken1(token);
+      setZustandToken(token);
       navigate("/dashboard");
     },
     onError: (err) => {
