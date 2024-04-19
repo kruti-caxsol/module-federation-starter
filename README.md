@@ -58,13 +58,13 @@ This document outlines the architecture and components of a micro frontend appli
 First step:
 
 ```s
- Clone the repository.
+Clone the repository.
 ```
 
 Second Step: `Fire command in each mfe app`
 
 ```s
- npm install
+npm install
 ```
 
 Third Step: `To run each micro app`
