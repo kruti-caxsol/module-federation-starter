@@ -1,7 +1,5 @@
 ## Micro Frontend Application
 
----
-
 **_Introduction_**
 This document outlines the architecture and components of a micro frontend application built using React, TypeScript, and Module Federation. The application comprises several modules, including a Shell application, Services, Auth app, Styleguide, and Employee Management. Each module plays a distinct role in the overall functionality and structure of the application.
 
