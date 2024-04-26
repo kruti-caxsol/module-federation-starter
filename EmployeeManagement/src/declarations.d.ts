@@ -39,7 +39,7 @@ declare module "services/QueryMutation_SR" {
   import { DocumentNode } from "@apollo/client";
 
   export const GET_EMPLOYEES: DocumentNode;
-  export const ADD_EMPLOYEE: DocumentNode;
-  export const UPDATE_EMPLOYEE: DocumentNode;
-  export const REMOVE_EMPLOYEE: DocumentNode;
+  // export const ADD_EMPLOYEE: DocumentNode;
+  // export const UPDATE_EMPLOYEE: DocumentNode;
+  // export const REMOVE_EMPLOYEE: DocumentNode;
 }

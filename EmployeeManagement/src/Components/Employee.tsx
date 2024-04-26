@@ -12,24 +12,27 @@ import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import {
   GET_EMPLOYEES,
-  ADD_EMPLOYEE,
-  REMOVE_EMPLOYEE,
-  UPDATE_EMPLOYEE,
+  // ADD_EMPLOYEE,
+  // REMOVE_EMPLOYEE,
+  // UPDATE_EMPLOYEE,
 } from "services/QueryMutation_SR";
 import { IconButton, SvgIcon } from "@mui/material";
+import { Employee } from "../gql/graphql.ts";
 
 function EmployeeTable() {
-  interface Employee {
-    id: number;
-    name: string;
-    department: string;
-    createdBy: string;
-    updatedBy: string;
-  }
+  // interface Employee {
+  //   id: number;
+  //   name: string;
+  //   department: string;
+  //   createdBy: string;
+  //   updatedBy: string;
+  // }
+
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
     null,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log("getEmp", GET_EMPLOYEES);
 
   // Function to open the modal for editing an employee
   const openModal = (employee: Employee | null) => {
@@ -38,131 +41,131 @@ function EmployeeTable() {
   };
 
   // Function to close the modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   const authToken = localStorage.getItem("authToken");
-  const { loading, error, data } = useQuery(GET_EMPLOYEES, {
+  const { loading, error, data } = useQuery<Employee>(GET_EMPLOYEES, {
     context: {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : "",
       },
     },
   });
-  const [addEmployee] = useMutation(ADD_EMPLOYEE, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : "",
-      },
-    },
-    refetchQueries: [
-      {
-        query: GET_EMPLOYEES,
-        context: {
-          headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
-        },
-      },
-    ],
-  });
-  const [removeEmployee] = useMutation(REMOVE_EMPLOYEE, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : "",
-      },
-    },
-    refetchQueries: [
-      {
-        query: GET_EMPLOYEES,
-        context: {
-          headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
-        },
-      },
-    ],
-  });
-  const [updateEmployee] = useMutation(UPDATE_EMPLOYEE, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : "",
-      },
-    },
-    refetchQueries: [
-      {
-        query: GET_EMPLOYEES,
-        context: {
-          headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
-        },
-      },
-    ],
-  });
-  const [newEmployee, setNewEmployee] = useState({
-    name: "",
-    department: "",
-  });
+  // const [addEmployee] = useMutation<NewEmployee>(ADD_EMPLOYEE, {
+  //   context: {
+  //     headers: {
+  //       authorization: authToken ? `Bearer ${authToken}` : "",
+  //     },
+  //   },
+  //   refetchQueries: [
+  //     {
+  //       query: GET_EMPLOYEES,
+  //       context: {
+  //         headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
+  //       },
+  //     },
+  //   ],
+  // });
+  // const [removeEmployee] = useMutation(REMOVE_EMPLOYEE, {
+  //   context: {
+  //     headers: {
+  //       authorization: authToken ? `Bearer ${authToken}` : "",
+  //     },
+  //   },
+  //   refetchQueries: [
+  //     {
+  //       query: GET_EMPLOYEES,
+  //       context: {
+  //         headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
+  //       },
+  //     },
+  //   ],
+  // });
+  // const [updateEmployee] = useMutation<UpdateEmployee>(UPDATE_EMPLOYEE, {
+  //   context: {
+  //     headers: {
+  //       authorization: authToken ? `Bearer ${authToken}` : "",
+  //     },
+  //   },
+  //   refetchQueries: [
+  //     {
+  //       query: GET_EMPLOYEES,
+  //       context: {
+  //         headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
+  //       },
+  //     },
+  //   ],
+  // });
+  // const [newEmployee, setNewEmployee] = useState({
+  //   name: "",
+  //   department: "",
+  // });
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setNewEmployee({ ...newEmployee, [name]: value });
-  };
+  // const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
+  //   setNewEmployee({ ...newEmployee, [name]: value });
+  // };
 
-  const handleAddEmployee = () => {
-    addEmployee({
-      variables: {
-        name: newEmployee.name,
-        department: newEmployee.department,
-      },
-    })
-      .then(() => {
-        setNewEmployee({ name: "", department: "" });
-      })
-      .catch((err) => {
-        console.error("Error adding employee:", err);
-      });
-  };
+  // const handleAddEmployee = () => {
+  //   addEmployee({
+  //     variables: {
+  //       name: newEmployee.name,
+  //       department: newEmployee.department,
+  //     },
+  //   })
+  //     .then(() => {
+  //       setNewEmployee({ name: "", department: "" });
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error adding employee:", err);
+  //     });
+  // };
 
-  const handleDeleteEmployee = (id: number) => {
-    removeEmployee({
-      variables: {
-        id: id.toString(),
-      },
-    })
-      .then(() => {
-        console.log("Employee removed successfully.");
-      })
-      .catch((err) => {
-        console.error("Error removing employee:", err);
-      });
-  };
+  // const handleDeleteEmployee = (id: string) => {
+  //   removeEmployee({
+  //     variables: {
+  //       id: id.toString(),
+  //     },
+  //   })
+  //     .then(() => {
+  //       console.log("Employee removed successfully.");
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error removing employee:", err);
+  //     });
+  // };
 
-  const handleUpdateEmployee = async (
-    id: number,
-    name: string,
-    department: string,
-    event: FormEvent<HTMLFormElement>,
-  ) => {
-    event.preventDefault();
-    await updateEmployee({
-      variables: {
-        id: id.toString(),
-        name,
-        department,
-      },
-    })
-      .then(() => {
-        closeModal();
-      })
-      .catch((err) => {
-        console.error("Error updating employee:", err);
-        // Add error handling logic here if needed
-      });
-  };
+  // const handleUpdateEmployee = async (
+  //   id: string,
+  //   name: string,
+  //   department: string,
+  //   event: FormEvent<HTMLFormElement>,
+  // ) => {
+  //   event.preventDefault();
+  //   await updateEmployee({
+  //     variables: {
+  //       id: id.toString(),
+  //       name,
+  //       department,
+  //     },
+  //   })
+  //     .then(() => {
+  //       closeModal();
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error updating employee:", err);
+  //       // Add error handling logic here if needed
+  //     });
+  // };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div>
-      <div style={{ marginTop: "20px" }}>
+      {/* <div style={{ marginTop: "20px" }}>
         <TextField
           label="Name"
           name="name"
@@ -182,7 +185,7 @@ function EmployeeTable() {
         <Button variant="contained" color="primary" onClick={handleAddEmployee}>
           Add Employee
         </Button>
-      </div>
+      </div> */}
       <TableContainer component={Paper} sx={{ marginTop: "25px" }}>
         <Table>
           <TableHead>
@@ -195,7 +198,7 @@ function EmployeeTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.getEmployees.map((employee: Employee) => (
+            {data?.getEmployees.map((employee: Employee) => (
               <TableRow key={employee.id}>
                 <TableCell>{employee.name}</TableCell>
                 <TableCell>{employee.department}</TableCell>
@@ -209,21 +212,21 @@ function EmployeeTable() {
                   >
                     Update
                   </Button>
-                  <Button
+                  {/* <Button
                     variant="contained"
                     color="secondary"
                     onClick={() => handleDeleteEmployee(employee.id)}
                     style={{ marginLeft: "20px" }}
                   >
                     Delete
-                  </Button>
+                  </Button> */}
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Modal open={isModalOpen} onClose={closeModal}>
+      {/* <Modal open={isModalOpen} onClose={closeModal}>
         <div
           style={{
             position: "absolute",
@@ -291,7 +294,7 @@ function EmployeeTable() {
             </Button>
           </form>
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
