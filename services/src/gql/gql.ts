@@ -14,9 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query GetEmployees3 {\n    getEmployees {\n      id\n      name\n      department\n      createdBy\n      updatedBy\n    }\n  }\n": types.GetEmployees3Document,
-    "\n  mutation AddEmployee($name: String!, $department: Department) {\n    addEmployee(customer: { name: $name, department: $department }) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n": types.AddEmployeeDocument,
+    "\n  mutation AddEmployee($name: String!, $department: Department) {\n    addEmployee(employee: { name: $name, department: $department }) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n": types.AddEmployeeDocument,
     "\n  mutation RemoveEmployee($id: ID!) {\n    removeEmployee(id: $id)\n  }\n": types.RemoveEmployeeDocument,
-    "\n  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {\n    updateEmployee(\n      customer: { id: $id, name: $name, department: $department }\n    ) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n": types.UpdateEmployeeDocument,
+    "\n  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {\n    updateEmployee(\n      employee: { id: $id, name: $name, department: $department }\n    ) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n": types.UpdateEmployeeDocument,
 };
 
 /**
@@ -40,7 +40,7 @@ export function graphql(source: "\n  query GetEmployees3 {\n    getEmployees {\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation AddEmployee($name: String!, $department: Department) {\n    addEmployee(customer: { name: $name, department: $department }) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"): (typeof documents)["\n  mutation AddEmployee($name: String!, $department: Department) {\n    addEmployee(customer: { name: $name, department: $department }) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"];
+export function graphql(source: "\n  mutation AddEmployee($name: String!, $department: Department) {\n    addEmployee(employee: { name: $name, department: $department }) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"): (typeof documents)["\n  mutation AddEmployee($name: String!, $department: Department) {\n    addEmployee(employee: { name: $name, department: $department }) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -48,7 +48,7 @@ export function graphql(source: "\n  mutation RemoveEmployee($id: ID!) {\n    re
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {\n    updateEmployee(\n      customer: { id: $id, name: $name, department: $department }\n    ) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {\n    updateEmployee(\n      customer: { id: $id, name: $name, department: $department }\n    ) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"];
+export function graphql(source: "\n  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {\n    updateEmployee(\n      employee: { id: $id, name: $name, department: $department }\n    ) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {\n    updateEmployee(\n      employee: { id: $id, name: $name, department: $department }\n    ) {\n      id\n      name\n      department\n      createdBy\n      creationDateTime\n      updatedBy\n      modificationDateTime\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

@@ -72,7 +72,7 @@ export const GET_EMPLOYEES = graphql(`
 // GraphQL mutation to add an employee
 export const ADD_EMPLOYEE = graphql(`
   mutation AddEmployee($name: String!, $department: Department) {
-    addEmployee(customer: { name: $name, department: $department }) {
+    addEmployee(employee: { name: $name, department: $department }) {
       id
       name
       department
@@ -93,7 +93,7 @@ export const REMOVE_EMPLOYEE = graphql(`
 export const UPDATE_EMPLOYEE = graphql(`
   mutation UpdateEmployee($id: ID!, $name: String, $department: String) {
     updateEmployee(
-      customer: { id: $id, name: $name, department: $department }
+      employee: { id: $id, name: $name, department: $department }
     ) {
       id
       name
