@@ -1,0 +1,11 @@
+mutation AddEmployee {
+    addEmployee(employee: { name: "admin", department: Admin }) {
+        id
+        name
+        department
+        createdBy
+        creationDateTime
+        updatedBy
+        modificationDateTime
+    }
+}
