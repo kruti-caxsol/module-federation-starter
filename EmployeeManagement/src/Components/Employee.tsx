@@ -15,7 +15,7 @@ import {
   ADD_EMPLOYEE,
   REMOVE_EMPLOYEE,
   UPDATE_EMPLOYEE,
-} from "services/QueryMutation_SR";
+} from "../Testqueries/queries.tsx";
 import { IconButton, SvgIcon } from "@mui/material";
 import { Employee, NewEmployee, UpdateEmployee } from "../gql/graphql.ts";
 
@@ -209,6 +209,7 @@ function EmployeeTable() {
                     variant="contained"
                     color="primary"
                     onClick={() => openModal(employee)}
+                    data-testid = "update-button"
                   >
                     Update
                   </Button>
@@ -275,6 +276,7 @@ function EmployeeTable() {
               }
               variant="outlined"
               style={{ marginBottom: "10px" }}
+              data-testid="name-input"
             />
             <TextField
               label="Department"
