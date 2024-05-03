@@ -1,0 +1,35 @@
+query GetEmployee {
+  getEmployee(id: "abc") {
+    id
+    name
+    department
+    createdBy
+    creationDateTime
+    updatedBy
+    modificationDateTime
+  }
+}
+
+mutation AddEmployee {
+  addEmployee(employee: { name: "admin", department: Admin }) {
+    id
+    name
+    department
+    createdBy
+    creationDateTime
+    updatedBy
+    modificationDateTime
+  }
+}
+
+mutation UpdateEmployee {
+  updateEmployee(employee: { name: "admin", id: "2", department: "Admin" }) {
+    id
+    name
+    department
+    createdBy
+    creationDateTime
+    updatedBy
+    modificationDateTime
+  }
+}

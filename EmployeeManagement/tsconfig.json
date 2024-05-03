@@ -21,6 +21,6 @@
     "checkJs": true,
     "isolatedModules": true
   },
-  "include": ["src/**/**/*"],
+  "include": ["src/**/**/*", "codegen.test.ts"],
   "exclude": ["node_modules"]
 }

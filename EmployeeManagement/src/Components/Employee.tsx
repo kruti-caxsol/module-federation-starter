@@ -17,7 +17,12 @@ import {
   UPDATE_EMPLOYEE,
 } from "services/QueryMutation_SR";
 import { IconButton, SvgIcon } from "@mui/material";
-import { Employee, NewEmployee, UpdateEmployee } from "../gql/graphql.ts";
+
+import {
+  AddEmployeeMutation,
+  Employee,
+  UpdateEmployeeMutation,
+} from "../gql/operations.ts";
 
 function EmployeeTable() {
   // interface Employee {
@@ -32,7 +37,6 @@ function EmployeeTable() {
     null,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log("getEmp", GET_EMPLOYEES);
 
   // Function to open the modal for editing an employee
   const openModal = (employee: Employee | null) => {
@@ -53,7 +57,7 @@ function EmployeeTable() {
       },
     },
   });
-  const [addEmployee] = useMutation<NewEmployee>(ADD_EMPLOYEE, {
+  const [addEmployee] = useMutation<AddEmployeeMutation>(ADD_EMPLOYEE, {
     context: {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : "",
@@ -83,21 +87,24 @@ function EmployeeTable() {
       },
     ],
   });
-  const [updateEmployee] = useMutation<UpdateEmployee>(UPDATE_EMPLOYEE, {
-    context: {
-      headers: {
-        authorization: authToken ? `Bearer ${authToken}` : "",
-      },
-    },
-    refetchQueries: [
-      {
-        query: GET_EMPLOYEES,
-        context: {
-          headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
+  const [updateEmployee] = useMutation<UpdateEmployeeMutation>(
+    UPDATE_EMPLOYEE,
+    {
+      context: {
+        headers: {
+          authorization: authToken ? `Bearer ${authToken}` : "",
         },
       },
-    ],
-  });
+      refetchQueries: [
+        {
+          query: GET_EMPLOYEES,
+          context: {
+            headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
+          },
+        },
+      ],
+    },
+  );
   const [newEmployee, setNewEmployee] = useState({
     name: "",
     department: "",
@@ -198,31 +205,64 @@ function EmployeeTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.getEmployees.map((employee: Employee) => (
-              <TableRow key={employee.id}>
-                <TableCell>{employee.name}</TableCell>
-                <TableCell>{employee.department}</TableCell>
-                <TableCell>{employee.createdBy}</TableCell>
-                <TableCell>{employee.updatedBy}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => openModal(employee)}
-                  >
-                    Update
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => handleDeleteEmployee(employee.id)}
-                    style={{ marginLeft: "20px" }}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {(() => {
+              if (loading) {
+                return (
+                  <TableRow>
+                    <TableCell colSpan={5}>Loading...</TableCell>
+                  </TableRow>
+                );
+              }
+
+              if (error) {
+                return (
+                  <TableRow>
+                    <TableCell colSpan={5}>
+                      Error:{" "}
+                      {typeof error === "string" ? error : "An error occurred"}
+                    </TableCell>
+                  </TableRow>
+                );
+              }
+
+              if (
+                data &&
+                Array.isArray(data.getEmployees) &&
+                data.getEmployees.length > 0
+              ) {
+                return data.getEmployees.map((employee: Employee) => (
+                  <TableRow key={employee.id}>
+                    <TableCell>{employee.name}</TableCell>
+                    <TableCell>{employee.department}</TableCell>
+                    <TableCell>{employee.createdBy}</TableCell>
+                    <TableCell>{employee.updatedBy}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => openModal(employee)}
+                      >
+                        Update
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => handleDeleteEmployee(employee.id)}
+                        style={{ marginLeft: "20px" }}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ));
+              }
+
+              return (
+                <TableRow>
+                  <TableCell colSpan={5}>No employees found.</TableCell>
+                </TableRow>
+              );
+            })()}
           </TableBody>
         </Table>
       </TableContainer>
