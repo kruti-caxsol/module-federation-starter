@@ -1,5 +1,15 @@
-query GetEmployee {
-  getEmployee(id: "abc") {
+query GetEmployees {
+  getEmployees {
+    id
+    name
+    department
+    createdBy
+    updatedBy
+  }
+}
+
+mutation AddEmployee($name: String!, $department: Department) {
+  addEmployee(employee: { name: $name, department: $department }) {
     id
     name
     department
@@ -10,20 +20,14 @@ query GetEmployee {
   }
 }
 
-mutation AddEmployee {
-  addEmployee(employee: { name: "admin", department: Admin }) {
-    id
-    name
-    department
-    createdBy
-    creationDateTime
-    updatedBy
-    modificationDateTime
-  }
+mutation RemoveEmployee($id: ID!) {
+  removeEmployee(id: $id)
 }
 
-mutation UpdateEmployee {
-  updateEmployee(employee: { name: "admin", id: "2", department: "Admin" }) {
+mutation UpdateEmployee($id: ID!, $name: String, $department: String) {
+  updateEmployee(
+    employee: { id: $id, name: $name, department: $department }
+  ) {
     id
     name
     department

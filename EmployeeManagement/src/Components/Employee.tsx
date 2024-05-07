@@ -10,18 +10,15 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
-import {
-  GET_EMPLOYEES,
-  ADD_EMPLOYEE,
-  REMOVE_EMPLOYEE,
-  UPDATE_EMPLOYEE,
-} from "services/QueryMutation_SR";
 import { errorlog } from "services/CustomLogger";
 import { IconButton, SvgIcon } from "@mui/material";
-
 import {
+  AddEmployeeDocument,
   AddEmployeeMutation,
+  RemoveEmployeeDocument,
+  UpdateEmployeeDocument,
   Employee,
+  GetEmployeesDocument,
   UpdateEmployeeMutation,
 } from "../gql/operations.ts";
 
@@ -51,14 +48,14 @@ function EmployeeTable() {
   };
 
   const authToken = localStorage.getItem("authToken");
-  const { loading, error, data } = useQuery<Employee>(GET_EMPLOYEES, {
+  const { loading, error, data } = useQuery<Employee>(GetEmployeesDocument, {
     context: {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : "",
       },
     },
   });
-  const [addEmployee] = useMutation<AddEmployeeMutation>(ADD_EMPLOYEE, {
+  const [addEmployee] = useMutation<AddEmployeeMutation>(AddEmployeeDocument, {
     context: {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : "",
@@ -66,14 +63,14 @@ function EmployeeTable() {
     },
     refetchQueries: [
       {
-        query: GET_EMPLOYEES,
+        query: GetEmployeesDocument,
         context: {
           headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
         },
       },
     ],
   });
-  const [removeEmployee] = useMutation(REMOVE_EMPLOYEE, {
+  const [removeEmployee] = useMutation(RemoveEmployeeDocument, {
     context: {
       headers: {
         authorization: authToken ? `Bearer ${authToken}` : "",
@@ -81,7 +78,7 @@ function EmployeeTable() {
     },
     refetchQueries: [
       {
-        query: GET_EMPLOYEES,
+        query: GetEmployeesDocument,
         context: {
           headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
         },
@@ -89,7 +86,7 @@ function EmployeeTable() {
     ],
   });
   const [updateEmployee] = useMutation<UpdateEmployeeMutation>(
-    UPDATE_EMPLOYEE,
+    UpdateEmployeeDocument,
     {
       context: {
         headers: {
@@ -98,7 +95,7 @@ function EmployeeTable() {
       },
       refetchQueries: [
         {
-          query: GET_EMPLOYEES,
+          query: GetEmployeesDocument,
           context: {
             headers: { authorization: authToken ? `Bearer ${authToken}` : "" },
           },
@@ -127,7 +124,7 @@ function EmployeeTable() {
         setNewEmployee({ name: "", department: "" });
       })
       .catch((err) => {
-        // errorlog("Error adding employee:", err);
+        errorlog("Error adding employee:", err);
       });
   };
 
@@ -141,7 +138,7 @@ function EmployeeTable() {
         console.log("Employee removed successfully.");
       })
       .catch((err) => {
-        // errorlog("Error removing employee", err);
+        errorlog("Error removing employee", err);
       });
   };
 
@@ -164,10 +161,7 @@ function EmployeeTable() {
       })
       .catch((err) => {
         // console.error("Error updating employee:", err);
-        // errorlog("error update employee", err);
-        console.log(err);
-        throw new Error("error of update");
-        
+        errorlog("error update employee", err);
       });
   };
 

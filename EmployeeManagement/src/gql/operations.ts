@@ -146,23 +146,24 @@ export type User = {
   username: Scalars["String"]["output"];
 };
 
-export type GetEmployeeQueryVariables = Exact<{ [key: string]: never }>;
+export type GetEmployeesQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetEmployeeQuery = {
+export type GetEmployeesQuery = {
   __typename?: "Query";
-  getEmployee?: {
+  getEmployees: Array<{
     __typename?: "Employee";
     id: string;
     name: string;
     department: Department;
     createdBy: string;
-    creationDateTime: string;
     updatedBy: string;
-    modificationDateTime: string;
-  } | null;
+  } | null>;
 };
 
-export type AddEmployeeMutationVariables = Exact<{ [key: string]: never }>;
+export type AddEmployeeMutationVariables = Exact<{
+  name: Scalars["String"]["input"];
+  department?: InputMaybe<Department>;
+}>;
 
 export type AddEmployeeMutation = {
   __typename?: "Mutation";
@@ -178,7 +179,20 @@ export type AddEmployeeMutation = {
   };
 };
 
-export type UpdateEmployeeMutationVariables = Exact<{ [key: string]: never }>;
+export type RemoveEmployeeMutationVariables = Exact<{
+  id: Scalars["ID"]["input"];
+}>;
+
+export type RemoveEmployeeMutation = {
+  __typename?: "Mutation";
+  removeEmployee?: boolean | null;
+};
+
+export type UpdateEmployeeMutationVariables = Exact<{
+  id: Scalars["ID"]["input"];
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  department?: InputMaybe<Scalars["String"]["input"]>;
+}>;
 
 export type UpdateEmployeeMutation = {
   __typename?: "Mutation";
@@ -194,85 +208,85 @@ export type UpdateEmployeeMutation = {
   };
 };
 
-export const GetEmployeeDocument = gql`
-  query GetEmployee {
-    getEmployee(id: "abc") {
+export const GetEmployeesDocument = gql`
+  query GetEmployees {
+    getEmployees {
       id
       name
       department
       createdBy
-      creationDateTime
       updatedBy
-      modificationDateTime
     }
   }
 `;
 
 /**
- * __useGetEmployeeQuery__
+ * __useGetEmployeesQuery__
  *
- * To run a query within a React component, call `useGetEmployeeQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetEmployeeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetEmployeesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEmployeesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetEmployeeQuery({
+ * const { data, loading, error } = useGetEmployeesQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetEmployeeQuery(
+export function useGetEmployeesQuery(
   baseOptions?: Apollo.QueryHookOptions<
-    GetEmployeeQuery,
-    GetEmployeeQueryVariables
+    GetEmployeesQuery,
+    GetEmployeesQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetEmployeeQuery, GetEmployeeQueryVariables>(
-    GetEmployeeDocument,
+  return Apollo.useQuery<GetEmployeesQuery, GetEmployeesQueryVariables>(
+    GetEmployeesDocument,
     options,
   );
 }
-export function useGetEmployeeLazyQuery(
+export function useGetEmployeesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    GetEmployeeQuery,
-    GetEmployeeQueryVariables
+    GetEmployeesQuery,
+    GetEmployeesQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetEmployeeQuery, GetEmployeeQueryVariables>(
-    GetEmployeeDocument,
+  return Apollo.useLazyQuery<GetEmployeesQuery, GetEmployeesQueryVariables>(
+    GetEmployeesDocument,
     options,
   );
 }
-export function useGetEmployeeSuspenseQuery(
+export function useGetEmployeesSuspenseQuery(
   baseOptions?: Apollo.SuspenseQueryHookOptions<
-    GetEmployeeQuery,
-    GetEmployeeQueryVariables
+    GetEmployeesQuery,
+    GetEmployeesQueryVariables
   >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery<GetEmployeeQuery, GetEmployeeQueryVariables>(
-    GetEmployeeDocument,
+  return Apollo.useSuspenseQuery<GetEmployeesQuery, GetEmployeesQueryVariables>(
+    GetEmployeesDocument,
     options,
   );
 }
-export type GetEmployeeQueryHookResult = ReturnType<typeof useGetEmployeeQuery>;
-export type GetEmployeeLazyQueryHookResult = ReturnType<
-  typeof useGetEmployeeLazyQuery
+export type GetEmployeesQueryHookResult = ReturnType<
+  typeof useGetEmployeesQuery
 >;
-export type GetEmployeeSuspenseQueryHookResult = ReturnType<
-  typeof useGetEmployeeSuspenseQuery
+export type GetEmployeesLazyQueryHookResult = ReturnType<
+  typeof useGetEmployeesLazyQuery
 >;
-export type GetEmployeeQueryResult = Apollo.QueryResult<
-  GetEmployeeQuery,
-  GetEmployeeQueryVariables
+export type GetEmployeesSuspenseQueryHookResult = ReturnType<
+  typeof useGetEmployeesSuspenseQuery
+>;
+export type GetEmployeesQueryResult = Apollo.QueryResult<
+  GetEmployeesQuery,
+  GetEmployeesQueryVariables
 >;
 export const AddEmployeeDocument = gql`
-  mutation AddEmployee {
-    addEmployee(employee: { name: "admin", department: Admin }) {
+  mutation AddEmployee($name: String!, $department: Department) {
+    addEmployee(employee: { name: $name, department: $department }) {
       id
       name
       department
@@ -301,6 +315,8 @@ export type AddEmployeeMutationFn = Apollo.MutationFunction<
  * @example
  * const [addEmployeeMutation, { data, loading, error }] = useAddEmployeeMutation({
  *   variables: {
+ *      name: // value for 'name'
+ *      department: // value for 'department'
  *   },
  * });
  */
@@ -325,9 +341,59 @@ export type AddEmployeeMutationOptions = Apollo.BaseMutationOptions<
   AddEmployeeMutation,
   AddEmployeeMutationVariables
 >;
+export const RemoveEmployeeDocument = gql`
+  mutation RemoveEmployee($id: ID!) {
+    removeEmployee(id: $id)
+  }
+`;
+export type RemoveEmployeeMutationFn = Apollo.MutationFunction<
+  RemoveEmployeeMutation,
+  RemoveEmployeeMutationVariables
+>;
+
+/**
+ * __useRemoveEmployeeMutation__
+ *
+ * To run a mutation, you first call `useRemoveEmployeeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveEmployeeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeEmployeeMutation, { data, loading, error }] = useRemoveEmployeeMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useRemoveEmployeeMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    RemoveEmployeeMutation,
+    RemoveEmployeeMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    RemoveEmployeeMutation,
+    RemoveEmployeeMutationVariables
+  >(RemoveEmployeeDocument, options);
+}
+export type RemoveEmployeeMutationHookResult = ReturnType<
+  typeof useRemoveEmployeeMutation
+>;
+export type RemoveEmployeeMutationResult =
+  Apollo.MutationResult<RemoveEmployeeMutation>;
+export type RemoveEmployeeMutationOptions = Apollo.BaseMutationOptions<
+  RemoveEmployeeMutation,
+  RemoveEmployeeMutationVariables
+>;
 export const UpdateEmployeeDocument = gql`
-  mutation UpdateEmployee {
-    updateEmployee(employee: { name: "admin", id: "2", department: "Admin" }) {
+  mutation UpdateEmployee($id: ID!, $name: String, $department: String) {
+    updateEmployee(
+      employee: { id: $id, name: $name, department: $department }
+    ) {
       id
       name
       department
@@ -356,6 +422,9 @@ export type UpdateEmployeeMutationFn = Apollo.MutationFunction<
  * @example
  * const [updateEmployeeMutation, { data, loading, error }] = useUpdateEmployeeMutation({
  *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      department: // value for 'department'
  *   },
  * });
  */
