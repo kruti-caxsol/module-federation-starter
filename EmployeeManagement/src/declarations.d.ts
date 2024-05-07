@@ -43,3 +43,7 @@ declare module "services/QueryMutation_SR" {
   export const UPDATE_EMPLOYEE: DocumentNode;
   export const REMOVE_EMPLOYEE: DocumentNode;
 }
+declare module "services/CustomLogger" {
+  export const errorlog: (message: string, data?: any) => void;
+  export const info: (message: string, data?: any) => void;
+}

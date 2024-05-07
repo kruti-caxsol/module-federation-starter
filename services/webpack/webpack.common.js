@@ -69,6 +69,8 @@ module.exports = {
           "..",
           "./src/sharedQueryMutation/SharedQueryMutation.ts",
         ),
+        "./CustomLogger": path.resolve(__dirname, "..", "./logger.ts"),
+        "./LogReport": path.resolve(__dirname, "..", "./LoggerReport.tsx"),
       },
       remotes: {},
       shared: {

@@ -86,3 +86,9 @@ declare module "animation/AnimationList" {
   const AnimeEpisode: ComponentType;
   export default AnimeEpisode;
 }
+
+declare module "services/LogReport" {
+  import { ComponentType } from "react";
+  const LogReport: ComponentType;
+  export default LogReport;
+}

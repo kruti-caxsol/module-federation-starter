@@ -12,6 +12,7 @@ const DemoPubSub = React.lazy(() => import("authapp/DemoPubSub"));
 const ProtectedRoute = React.lazy(() => import("services/ProtectedRoute"));
 const Employee = React.lazy(() => import("employee/TotalEmployee"));
 const AnimeEpisode = React.lazy(() => import("animation/AnimationList"));
+const LogReport = React.lazy(() => import("services/LogReport"));
 // const Layout = React.lazy(() => import("styleguide/Layout"));
 
 export default function App() {
@@ -83,6 +84,16 @@ export default function App() {
                   <ErrorBoundary>
                     <React.Suspense fallback="Loading">
                       <AnimeEpisode />
+                    </React.Suspense>
+                  </ErrorBoundary>
+                }
+              />
+              <Route
+                path="/log-report"
+                element={
+                  <ErrorBoundary>
+                    <React.Suspense fallback="Loading">
+                      <LogReport />
                     </React.Suspense>
                   </ErrorBoundary>
                 }

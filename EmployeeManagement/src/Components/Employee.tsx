@@ -16,6 +16,7 @@ import {
   REMOVE_EMPLOYEE,
   UPDATE_EMPLOYEE,
 } from "services/QueryMutation_SR";
+import { errorlog } from "services/CustomLogger";
 import { IconButton, SvgIcon } from "@mui/material";
 
 import {
@@ -126,7 +127,7 @@ function EmployeeTable() {
         setNewEmployee({ name: "", department: "" });
       })
       .catch((err) => {
-        console.error("Error adding employee:", err);
+        // errorlog("Error adding employee:", err);
       });
   };
 
@@ -140,7 +141,7 @@ function EmployeeTable() {
         console.log("Employee removed successfully.");
       })
       .catch((err) => {
-        console.error("Error removing employee:", err);
+        // errorlog("Error removing employee", err);
       });
   };
 
@@ -162,8 +163,11 @@ function EmployeeTable() {
         closeModal();
       })
       .catch((err) => {
-        console.error("Error updating employee:", err);
-        // Add error handling logic here if needed
+        // console.error("Error updating employee:", err);
+        // errorlog("error update employee", err);
+        console.log(err);
+        throw new Error("error of update");
+        
       });
   };
 
